@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crypto Liquidity Trap Scanner (Phone)</title>
+  <style>
+    body { font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial; margin: 14px; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    button { padding:10px 12px; font-size:16px; }
+    input, select { padding:10px; font-size:16px; }
+    .pill { padding:6px 10px; border-radius:999px; background:#eee; display:inline-block; }
+    .grid { display:grid; grid-template-columns: 1fr; gap:10px; margin-top:12px; }
+    .card { border:1px solid #ddd; border-radius:12px; padding:12px; }
+    .muted { color:#666; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .bad { background:#ffe5e5; }
+    .good { background:#e9ffe9; }
+    .warn { background:#fff6d6; }
+  </style>
+</head>
+<body>
+  <h2>Liquidity Trap Signal Scanner (Signals-only)</h2>
+
+  <div class="card warn">
+    <div><b>Important:</b> Scans only while this page stays open and in the foreground (iPhone pauses background tabs).</div>
+    <div class="muted">No trading, no keys, public Binance data only.</div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <button id="toggleBtn">Start Scan</button>
+      <button id="testBtn">Send Test Signal</button>
+
+      <label class="pill">Universe
+        <select id="universe">
+          <option value="50" selected>Top 50</option>
+          <option value="100">Top 100</option>
+        </select>
+      </label>
+
+      <label class="pill">Interval (sec)
+        <select id="intervalSec">
+          <option value="5" selected>5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+      </label>
+
+      <label class="pill">Score ≥
+        <select id="scoreMin">
+          <option value="70">70</option>
+          <option value="75" selected>75</option>
+          <option value="80">80</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+      <span class="pill">Status: <b id="status">STOPPED</b></span>
+      <span class="pill">Server time: <span id="srvTime" class="mono">—</span></span>
+      <span class="pill">Last scan: <span id="lastScan" class="mono">—</span></span>
+      <span class="pill">Mode: <b>LIVE</b></span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3 style="margin:0 0 8px 0;">Latest Signals</h3>
+      <div id="signals" class="grid"></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 8px 0;">Logs</h3>
+      <div id="logs" class="mono muted" style="white-space:pre-wrap;"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
